@@ -3,10 +3,10 @@ import { randomUUID } from 'node:crypto';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
-import { z } from 'zod';
 import { isInitializeRequest } from '@modelcontextprotocol/sdk/types.js';
 import { InMemoryEventStore } from '@modelcontextprotocol/sdk/examples/shared/inMemoryEventStore.js';
-import { TempStorage } from './utils/tempStorage.js';
+import { z } from 'zod';
+import { TempStorage } from './utils/temp-storage.js';
 
 // Initialize express app
 const app = express();
@@ -25,8 +25,8 @@ const server = new McpServer(
     capabilities: {
       tools: {
         description: [
-          "A tool for fetching S3 documents using signed URLs\n",
-          "ALWAYS INCLUDE THE FULL SIGNED URL IN THE INPUT, DO NOT OMIT SECURITY RELATED QUERY PARAMS"
+          "A tool for fetching documents using URLs\n",
+          "ALWAYS INCLUDE THE FULL URL IN THE INPUT, DO NOT OMIT SECURITY RELATED QUERY PARAMS"
         ],
         examples: [
           {
@@ -34,7 +34,7 @@ const server = new McpServer(
             input: {
               url: "https://prod-files-secure.s3.us-west-2.amazonaws.com/bucket/path/filename.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=credential&X-Amz-Date=20250427T170405Z&X-Amz-Expires=3600&X-Amz-Security-Token=token&X-Amz-Signature=sig&X-Amz-SignedHeaders=host&x-id=GetObject"
             },
-            expected_output: "Returns document content as text or file location for binary content"
+            expected_output: "Returns the location of the file on the computer"
           }
         ]
       }
