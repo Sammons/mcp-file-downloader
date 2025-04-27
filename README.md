@@ -34,17 +34,12 @@ A Model Context Protocol (MCP) server implementation for fetching documents from
 
 1. Install dependencies:
    ```bash
-   npm ci
+   npm install
    ```
 
 2. Start the development server:
    ```bash
    npm run dev
-   ```
-
-3. Run tests:
-   ```bash
-   npm test
    ```
 
 ## API Endpoints
@@ -82,9 +77,8 @@ I use this within ~/.cursor/mcp.json, for example:
 friendly-fetch/
 ├── src/
 │   ├── index.ts           # Main server implementation
-│   ├── content.ts         # Content type handling utilities
 │   ├── utils/
-│   │   └── tempStorage.ts # Temporary file storage implementation
+│   │   └── temp-storage.ts # Temporary file storage implementation
 │   └── tests/
 │       └── setup.ts       # Test environment setup
 ├── Dockerfile             # Container definition
